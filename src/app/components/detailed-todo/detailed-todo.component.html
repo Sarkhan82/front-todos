@@ -1,1 +1,12 @@
-<p>detailed-todo works!</p>
+<h1 mat-dialog-title>
+    {{todoToDetailed.title}}
+  </h1>
+  <div class="modal_confirmation">
+    <div mat-dialog-content>
+      <p>{{todoToDetailed.description}}</p>
+    </div>
+  
+    <div mat-dialog-actions>
+      <button mat-button (click)="onDismiss()">Cancel</button>
+    </div>
+  </div>
