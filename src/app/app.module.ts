@@ -14,6 +14,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { EditTodoComponent } from './components/edit-todo/edit-todo.component';
+import { HttpClientModule } from '@angular/common/http';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 
@@ -23,8 +26,7 @@ import { EditTodoComponent } from './components/edit-todo/edit-todo.component';
     TodoListComponent,
     DetailedTodoComponent,
     AddTodoComponent,
-    EditTodoComponent,
-    
+    EditTodoComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,9 @@ import { EditTodoComponent } from './components/edit-todo/edit-todo.component';
     MatInputModule,
     MatTableModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

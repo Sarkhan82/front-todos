@@ -11,11 +11,11 @@ export class TodoServiceService {
   constructor(private http: HttpClient) { }
 
   private url : string = "http://localhost:8080"
-  private endpoint : string = "/todo"
-  private endpointDoneTodo : string = "/done"
+  private endpoint : string = "todo"
+  private endpointDoneTodo : string = "done"
 
   getAllTodos() {
-    return this.http.get<Todo>(`${this.url}/${this.endpoint}`).pipe(
+    return this.http.get<Todo[]>(`${this.url}/${this.endpoint}`).pipe(
       catchError((err) => {
         return throwError(() => new Error(err));
       })
