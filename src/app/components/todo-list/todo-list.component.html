@@ -29,7 +29,7 @@
         Details
       </th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon>description</mat-icon>
+        <mat-icon (click)="redirectToDetailedTodo(element)">description</mat-icon>
       </td>
     </ng-container>
 
