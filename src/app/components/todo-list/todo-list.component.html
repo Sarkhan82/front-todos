@@ -37,7 +37,7 @@
           Editer
         </th>
         <td mat-cell *matCellDef="let element">
-            <mat-icon>edit</mat-icon>
+            <mat-icon (click)="redirectEditTodo(element)">edit</mat-icon>
         </td>
       </ng-container>
 
