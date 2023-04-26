@@ -47,7 +47,7 @@
           Supprimer
         </th>
         <td mat-cell *matCellDef="let element">
-            <mat-icon>delete</mat-icon>
+            <mat-icon (click)="handleDeleteTodo(element)">delete</mat-icon>
         </td>
       </ng-container>
 
