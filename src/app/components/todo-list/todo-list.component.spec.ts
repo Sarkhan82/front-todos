@@ -59,6 +59,8 @@ describe('TodoListComponent', () => {
       expect(component.dataSource.data).toEqual(todos);
     });
   });
+
+  
   describe('handleDeleteTodo', () => {
     it('should open the confirmation dialog and call the todo service to delete the todo if confirmed', () => {
       const todo: Todo = { id: 1, title: 'Todo 1', description: "descripption 1", done: false };
@@ -102,6 +104,32 @@ describe('TodoListComponent', () => {
   
       component.handleDeleteTodo(todo);
   
+      expect(console.error).toHaveBeenCalledWith(error);
+    });
+  });
+
+  describe('handleDoneState', () => {
+    it('should call todoService to change done state and refresh todos', () => {
+      const todo: Todo = { id: 1, title: 'Todo 1', description: "description1", done: false };
+  
+      spyOn(component, 'getAllTodos');
+      todoServiceSpy.changeDoneStateTodo.and.returnValue(of(todo));
+  
+      component.handleDoneState(todo);
+  
+      expect(todoServiceSpy.changeDoneStateTodo).toHaveBeenCalledWith(todo.id);
+      expect(component.getAllTodos).toHaveBeenCalled();
+    });
+  
+    it('should log an error if the todo service throws an error', () => {
+      const todo: Todo = { id: 1, title: 'Todo 1', description: "description1", done: false };
+      const error = 'Error changing done state';
+      spyOn(console, 'error');
+      todoServiceSpy.changeDoneStateTodo.and.returnValue(throwError(error));
+  
+      component.handleDoneState(todo);
+  
+      expect(todoServiceSpy.changeDoneStateTodo).toHaveBeenCalledWith(todo.id);
       expect(console.error).toHaveBeenCalledWith(error);
     });
   });
