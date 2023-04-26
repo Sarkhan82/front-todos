@@ -1,13 +1,13 @@
-form {
+.dialog-container {
     display: flex;
-    width: 1000px;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: center;
 }
-mat-card {
+
+.form-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
-    width: 800px;
+    justify-content: center;
 }
