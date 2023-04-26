@@ -1,0 +1,14 @@
+<form [formGroup]="form" class="form">
+    <mat-card formGroupName="todo" class="card">
+    <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description">
+        </textarea>
+      </mat-form-field>
+      <button type="submit" mat-raised-button (click)="handleAddTodo()">Ajouter</button>
+    </mat-card>
+    </form>
