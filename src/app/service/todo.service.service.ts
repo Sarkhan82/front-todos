@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Todo } from '../models/todo';
 import { catchError, throwError } from 'rxjs';
@@ -8,11 +8,20 @@ import { catchError, throwError } from 'rxjs';
 })
 export class TodoServiceService {
 
+
+
   constructor(private http: HttpClient) { }
 
   private url : string = "http://localhost:8080"
   private endpoint : string = "todo"
   private endpointDoneTodo : string = "done"
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
+
+
 
   getAllTodos() {
     return this.http.get<Todo[]>(`${this.url}/${this.endpoint}`).pipe(
@@ -31,7 +40,7 @@ export class TodoServiceService {
   }
 
   postTodo(data : Todo) {
-    return this.http.post<Todo>(`${this.url}/${this.endpoint}`, JSON.stringify(data)).pipe(
+    return this.http.post<Todo>(`${this.url}/${this.endpoint}`, JSON.stringify(data), this.httpOptions).pipe(
       catchError((err) => {
         return throwError(() => new Error(err));
       })

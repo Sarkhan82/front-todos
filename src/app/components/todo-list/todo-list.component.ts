@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Todo } from 'src/app/models/todo';
 import { TodoServiceService } from '../../service/todo.service.service';
@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent {
+export class TodoListComponent implements OnInit{
 
   dataSource!: MatTableDataSource<Todo>;
   displayedColumns: string[] = [
@@ -30,10 +30,15 @@ ngOnInit() {
 }
 
 getAllTodos() {
-  this.todoService.getAllTodos().subscribe(res => {
+  this.todoService.getAllTodos().subscribe({
+    next: (res) => {
     this.dataSource = new MatTableDataSource<Todo>(res);
     console.log(this.dataSource);  
-  })
+    },
+    error: (err) => {
+      console.error(err);
+    } 
+  });
 }
 
 redirectToDetailedTodo(todo : Todo) {

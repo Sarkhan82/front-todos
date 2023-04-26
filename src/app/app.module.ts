@@ -17,9 +17,7 @@ import { EditTodoComponent } from './components/edit-todo/edit-todo.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
-
-
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,7 +40,10 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
     MatDialogModule,
     HttpClientModule,
     MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
