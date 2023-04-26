@@ -6,6 +6,7 @@ import { DetailedTodoComponent, DetailedTodoComponentModel } from '../detailed-t
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent, ConfirmModalModel } from '../confirm-modal/confirm-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EditTodoComponent, EditTodoModel } from '../edit-todo/edit-todo.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -80,8 +81,18 @@ handleDoneState(todo : Todo) {
    },
 
   })
-   
-
 }
 
+redirectEditTodo(todo : Todo) {
+  const dialogData = new EditTodoModel(todo);
+  this.dialog.open(EditTodoComponent, {
+    maxWidth: '1000px',
+    data: dialogData,
+  }).afterClosed().subscribe(res => {
+    if(res === true) {
+      this.getAllTodos();
+    }
+  });
 }
+
+};
