@@ -29,10 +29,6 @@ this.form = new FormGroup({
   ngOnInit() : void {
   }
 
-  onDismiss(m?: string): void {
-    this.dialogRef.close(false);
-  }
-
   handleEditTodo(): void {
     const editedTodo = {
       id: this.todoToEdit.id,
