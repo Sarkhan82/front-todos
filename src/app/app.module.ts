@@ -16,6 +16,7 @@ import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { EditTodoComponent } from './components/edit-todo/edit-todo.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 
 
@@ -26,7 +27,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     TodoListComponent,
     DetailedTodoComponent,
     AddTodoComponent,
-    EditTodoComponent
+    EditTodoComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
