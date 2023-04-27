@@ -6,6 +6,8 @@ import { DetailedTodoComponent, DetailedTodoComponentModel } from '../detailed-t
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent, ConfirmModalModel } from '../confirm-modal/confirm-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EditTodoComponent, EditTodoModel } from '../edit-todo/edit-todo.component';
+import { AddTodoComponent, AddTodoModel } from '../add-todo/add-todo.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -32,8 +34,9 @@ ngOnInit() {
 getAllTodos() {
   this.todoService.getAllTodos().subscribe({
     next: (res) => {
-    this.dataSource = new MatTableDataSource<Todo>(res);
-    console.log(this.dataSource);  
+      const filteredRes = res.filter(todo => !todo.done).concat(res.filter(todo => todo.done));
+      this.dataSource = new MatTableDataSource<Todo>(filteredRes);
+      console.log(this.dataSource);  
     },
     error: (err) => {
       console.error(err);
@@ -48,7 +51,6 @@ redirectToDetailedTodo(todo : Todo) {
     data: dialogData
   })
 }
-
 
 handleDeleteTodo(todo: Todo) {
   const deleteConfirm = new ConfirmModalModel(`Supprimer ${todo.title}`, 'Êtes vous sur de vouloir supprimer cette todo ?');
@@ -69,4 +71,41 @@ handleDeleteTodo(todo: Todo) {
     }
   });
 }
+
+handleDoneState(todo : Todo) {
+  this.todoService.changeDoneStateTodo(todo.id).subscribe({
+    next: () => {
+    this.getAllTodos();
+    },
+   error(err) {
+       console.error(err)
+   },
+
+  })
 }
+
+redirectEditTodo(todo : Todo) {
+  const dialogData = new EditTodoModel(todo);
+  this.dialog.open(EditTodoComponent, {
+    maxWidth: '1000px',
+    data: dialogData,
+  }).afterClosed().subscribe(res => {
+    if(res === true) {
+      this.getAllTodos();
+    }
+  });
+}
+
+redirectToAddTodo() {
+  const dialogData = new AddTodoModel("Ajouter une nouvelle todo");
+  this.dialog.open(AddTodoComponent, {
+    maxWidth: '1000px',
+    data: dialogData,
+  }).afterClosed().subscribe(res => {
+    if(res === true) {
+      this.getAllTodos();
+    }
+  });
+}
+
+};

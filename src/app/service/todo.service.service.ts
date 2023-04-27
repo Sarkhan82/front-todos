@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Todo } from '../models/todo';
-import { catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +47,8 @@ export class TodoServiceService {
     )
   }
 
-  changeDoneStateTodo(data : Todo, id : number) {
-    return this.http.post<Todo>(`${this.url}/${this.endpointDoneTodo}/${id}`, JSON.stringify(data)).pipe(
+  changeDoneStateTodo(id : number) : Observable<Todo> {
+    return this.http.put<Todo>(`${this.url}/${this.endpoint}/${id}/${this.endpointDoneTodo}`, {}).pipe(
       catchError((err) => {
         return throwError(() => new Error(err));
       })
@@ -56,7 +56,7 @@ export class TodoServiceService {
   }
 
   editTodo(data : Todo, id : number) {
-    return this.http.post<Todo>(`${this.url}/${this.endpoint}/${id}`, JSON.stringify(data)).pipe(
+    return this.http.put<Todo>(`${this.url}/${this.endpoint}/${id}`, JSON.stringify(data), this.httpOptions).pipe(
       catchError((err) => {
         return throwError(() => new Error(err));
       })
